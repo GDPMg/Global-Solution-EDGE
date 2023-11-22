@@ -28,5 +28,135 @@ Back-end é o núcleo operacional da plataforma, onde residem elementos vitais c
 
 IoT (Internet of Things) é responsável por acomodar os dispositivos de IoT que estabelecem comunicação com o back-end através dos protocolos de comunicação MQTT ou HTTP/NGSIv2.
 
-https://user-images.githubusercontent.com/103905620/282064942-ea31ee72-ae7e-41e7-8931-a95928bb2371.png
+![image](https://github.com/GDPMg/Global-Solution-EDGE/assets/103905620/32dcec7b-7de6-4ee0-89d7-2a5c68eb6bba)
+
+O Projeto é composto por: 1 ESP32, 1 Buzzer, 2 Leds, 1 DHT22, 1 LCD 16x2
+
+![image](https://github.com/GDPMg/Global-Solution-EDGE/assets/103905620/035656d7-0c82-4716-b850-c31a1f87ca2f)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Vou explicar as partes principais do código:
+
+Includes de Bibliotecas:
+
+#include <WiFi.h>
+#include <PubSubClient.h>
+#include <DHTesp.h>
+#include <Wire.h>
+#include <LiquidCrystal.h>
+
+Importa as bibliotecas necessárias para lidar com Wi-Fi, MQTT, o sensor DHT22, comunicação I2C (Wire), e controle de um display LCD.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Definições de Pinos:
+
+#define DHT_PIN 15
+#define RED_LED 17
+#define GREEN_LED 16
+#define BUZZER 18
+#define LCD_RS 12
+#define LCD_EN 27
+#define LCD_D4 26
+#define LCD_D5 25
+#define LCD_D6 33
+#define LCD_D7 32
+
+Define os pinos a serem usados para o sensor DHT22, LEDs, buzzer e controle do LCD.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Definições de Tópicos MQTT e Identificação:
+
+#define TOPICO_SUBSCRIBE    "/TEF/lamp104/cmd"
+#define TOPICO_PUBLISH      "/TEF/lamp104/attrs"
+#define TOPICO_PUBLISH_T    "/TEF/lamp104/attrs/temp"
+#define TOPICO_PUBLISH_H    "/TEF/lamp104/attrs/humi"
+#define ID_MQTT  "fiware_104"
+
+Define os tópicos MQTT para subscrição e publicação, bem como a identificação única do cliente MQTT.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Configurações de Rede e MQTT:
+
+const char* SSID = "Wokwi-GUEST";
+const char* PASSWORD = "";
+const char* BROKER_MQTT = "46.17.108.113";
+int BROKER_PORT = 1883;
+
+Configurações para a rede Wi-Fi e informações sobre o broker MQTT.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Configuração e Inicialização:
+
+void setup() {
+    // Inicializações dos componentes e conexões.
+}
+
+Inicializações iniciais, como a configuração do sensor DHT22, LEDs, buzzer, LCD, conexão Wi-Fi e MQTT.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Declaração de Variáveis:
+
+const int potPin = 34;
+char msgBuffer[4];
+
+Define uma constante potPin com o valor 34 e cria um array de caracteres msgBuffer com tamanho 4.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Verificação e Reconexão Wi-Fi/MQTT:
+
+VerificaConexoesWiFIEMQTT();
+
+Chama a função VerificaConexoesWiFIEMQTT() para garantir que as conexões Wi-Fi e MQTT estejam funcionando. Esta função é definida em algum lugar do código (não fornecido aqui).
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Leitura da Temperatura e Umidade:
+
+float temperature = dht.getTemperature();
+float humidity = dht.getHumidity();
+
+Lê os valores de temperatura e umidade do sensor DHT22 e os armazena nas variáveis temperature e humidity.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Verificação do Sucesso da Leitura do Sensor:
+
+if (!isnan(temperature) && !isnan(humidity)) {
+    // Código dentro desta condição
+}
+
+Verifica se a leitura do sensor foi bem-sucedida usando a função isnan() (is not a number). Se for bem-sucedida, executa o código dentro desta condição.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lógica dos LEDs e Buzzer:
+
+if ((temperature >= 2 && temperature <= 8) && (humidity >= 60 && humidity <= 80)) {
+    // Condições para o LED verde
+    // ...
+} else {
+    // Condições para o LED vermelho
+    // ...
+}
+
+Dependendo das condições de temperatura e umidade, acende os LEDs verde ou vermelho, ativa o buzzer e exibe mensagens no LCD.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Envio de Dados para o Broker MQTT:
+
+char tempBuffer[6];
+char humiBuffer[6];
+dtostrf(temperature, 4, 2, tempBuffer);
+dtostrf(humidity, 4, 2, humiBuffer);
+MQTT.publish(TOPICO_PUBLISH_T, tempBuffer);
+MQTT.publish(TOPICO_PUBLISH_H, humiBuffer);
+
 
