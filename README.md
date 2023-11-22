@@ -1,6 +1,8 @@
 # Global-Solution-EDGE
 
-Descrição do problemaabordado
+Link: https://wokwi.com/projects/381488236442520577
+
+Descrição do problema abordado
 
 A garantia da guarda de medicamentos termolábeis refere-se ao desafio de manter a integridade e eficácia de medicamentos sensíveis à temperatura durante todo o processo de armazenamento e transporte. Medicamentos termolábeis são aqueles que podem ser danificados ou perder sua eficácia se expostos a variações extremas de temperatura.
 
