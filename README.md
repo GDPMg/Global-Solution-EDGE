@@ -1,5 +1,8 @@
 # Global-Solution-EDGE
 
+Guilherme Dal Posolo Matheus  /  RM: 98694
+Gustavo Brisqui Martinez      /  RM: 97969
+
 Link: https://wokwi.com/projects/381488236442520577
 
 Descrição do problema abordado
