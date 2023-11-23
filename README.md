@@ -3,7 +3,8 @@
 Guilherme Dal Posolo Matheus  /  RM: 98694
 Gustavo Brisqui Martinez      /  RM: 97969
 
-Link: https://wokwi.com/projects/381488236442520577
+Link Wokwi: https://wokwi.com/projects/381488236442520577
+Link Youtube: https://youtu.be/IX3YmfdA5K4?si=tA1kt-t0i2h4SRyU
 
 Descrição do problema abordado
 
